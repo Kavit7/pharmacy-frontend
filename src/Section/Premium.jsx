@@ -2,13 +2,13 @@ import React from "react";
 
 const Premium = () => {
   return (
-    <section className="p-25 flex flex-col justify-center items-center gap-10 bg-gray-300/10">
+    <section className="md:p-25 p-10 flex flex-col justify-center items-center gap-10 bg-gray-300/10">
       <div className="flex flex-col gap-3">
-        <h3 className="text-3xl font-bold">Premium healthcare services</h3>
+        <h3 className="md:text-3xl text-2xl text-center font-bold">Premium healthcare services</h3>
         <p className="text-center text-gray-500">Everything you need in one secure platform</p>
       </div>
 
-      <div className=" flex justify-center items-center space-x-20">
+      <div className=" md:flex md:justify-center md:items-center md:space-x-20 grid grid-cols-1 gap-3">
         {/* card 1 */}
         <div className="flex gap-2 border w-fit p-4 rounded-[10px] border-gray-400">
           <span className="bg-black/40 text-3xl text-white p-3 rounded-[100px]">
