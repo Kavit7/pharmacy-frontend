@@ -16,3 +16,11 @@
    .card-text {
        font-size: 0.85rem;
    }
+   
+   .form-border {
+       @apply flex w-full p-3 gap-3 rounded border border-gray-300;
+   }
+   
+   .form-border:focus-within {
+       @apply ring-1 ring-green-700;
+   }
