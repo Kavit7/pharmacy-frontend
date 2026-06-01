@@ -9,11 +9,11 @@
        line-height: 1.5;
    }
    
-   .card {
+   .cards {
        width: 220px;
    }
    
-   .card-text {
+   .cards-text {
        font-size: 0.85rem;
    }
    
@@ -23,4 +23,20 @@
    
    .form-border:focus-within {
        @apply ring-1 ring-green-700;
+   }
+   
+   .card {
+       @apply border border-gray-300 w-[250px] h-[100px] rounded;
+   }
+   
+   .card-header {
+       @apply text-base p-3 font-bold;
+   }
+   
+   .card-text {
+       @apply flex mt-5 justify-between text-2xl
+   }
+   
+   .dash-summary {
+       @apply rounded border p-3
    }

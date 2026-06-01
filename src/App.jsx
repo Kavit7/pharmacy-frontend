@@ -5,8 +5,12 @@ import './App.css'
 import Landing from './Page/Landing'
 import Registration from './Page/Registration'
 import AdminForm from './Page/AdminForm'
+import MainLayout from './Layout/MainLayout'
+import Dashboard from './Page/Dashboard'
+import Login from './Page/Login'
+import ProtectedRoute from './routes/ProtectedRoute'
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>
@@ -15,9 +19,18 @@ function App() {
              <Route path='/' element={<Landing/>}/>
              <Route path='/registration' element={<Registration/>}/>
              <Route path='/admin' element={<AdminForm/>}/>
+             <Route path='/dashboard' 
+             element={
+              <ProtectedRoute>
+              <MainLayout>
+              <Dashboard/>
+             </MainLayout>
 
-
-
+              </ProtectedRoute>
+             
+             
+            }/>
+             <Route path='/login' element={<Login/>}/>
          </Routes>
              
          </BrowserRouter>

@@ -39,9 +39,10 @@ const Header = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-3">
-          <button className="border border-green-900 rounded-lg px-3 py-1 font-bold hover:bg-green-900 hover:text-white">
+          <a href="/login"
+          className="border border-green-900 rounded-lg px-3 py-1 font-bold hover:bg-green-900 hover:text-white">
             Sign In
-          </button>
+          </a>
           <a
             href="/registration"
             className="bg-green-800 text-white px-3 py-1 rounded-lg font-bold hover:bg-green-900"
