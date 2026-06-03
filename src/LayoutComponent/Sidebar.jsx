@@ -24,7 +24,7 @@ const Sidebar = () => {
     },
     {
       text: "Medicine",
-      link: "/dashboard",
+      link: "/medicine",
       icon: Pill,
       color: "text-blue-600",
     },

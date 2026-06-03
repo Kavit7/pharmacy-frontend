@@ -9,6 +9,7 @@ import MainLayout from './Layout/MainLayout'
 import Dashboard from './Page/Dashboard'
 import Login from './Page/Login'
 import ProtectedRoute from './routes/ProtectedRoute'
+import Medicine from './Page/Medicine'
 function App() {
  
 
@@ -29,6 +30,13 @@ function App() {
               </ProtectedRoute>
              
              
+            }/>
+            <Route path='/medicine' element={
+              <ProtectedRoute>
+                <MainLayout>
+                  <Medicine/>
+                </MainLayout>
+              </ProtectedRoute>
             }/>
              <Route path='/login' element={<Login/>}/>
          </Routes>
