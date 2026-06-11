@@ -1,14 +1,21 @@
-import { Bell, LocateFixed, LogOut, LogOutIcon, Monitor, User } from "lucide-react";
+import {
+  Bell,
+  LocateFixed,
+  LogOutIcon,
+  Monitor,
+  User,
+  Menu,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode"
+import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-const Header = () => {
-  const navigate= useNavigate();
-  const [user,setUser]=useState(null)
+const Header = ({ onToggleSidebar }) => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
-  const [open,setOpen]= useState(false)
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -29,19 +36,19 @@ const Header = () => {
           const data = await res.json();
 
           // 🔥 unaweza customize hapa
-       const addr = data.address;
+          const addr = data.address;
 
-       const place =
-         addr.suburb || // mtaa
-         addr.village || // kijiji
-         addr.town || // town
-         addr.city || // city
-         addr.county || // wilaya
-         addr.state; // region
+          const place =
+            addr.suburb || // mtaa
+            addr.village || // kijiji
+            addr.town || // town
+            addr.city || // city
+            addr.county || // wilaya
+            addr.state; // region
 
-       const country = addr.country;
+          const country = addr.country;
 
-       setAddress(`${place}, ${country}`);
+          setAddress(`${place}, ${country}`);
         } catch (err) {
           setError("Failed to fetch address");
         }
@@ -56,38 +63,46 @@ const Header = () => {
     Swal.fire("Success", "LoggedOut successfully", "success");
     navigate("/");
   };
-  useEffect(()=>{
-    const token =localStorage.getItem("token");
-    if (token){
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
       const decode = jwtDecode(token);
       setUser(decode.data);
     }
-    
-  },[])
+  }, []);
 
   return (
     <>
       <header className="sticky top-0 z-50 w-full p-4 bg-white shadow-sm">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          {/* LOCATION */}
-          <div className="flex items-center gap-3">
-            <LocateFixed className="text-blue-500" />
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center justify-between gap-3">
+            <button
+              type="button"
+              className="md:hidden p-2 rounded-md bg-slate-100 hover:bg-slate-200"
+              onClick={onToggleSidebar}
+              aria-label="Open sidebar"
+            >
+              <Menu size={20} className="text-slate-700" />
+            </button>
 
-            <div className="text-sm text-gray-700 font-semibold truncate max-w-[200px] md:max-w-none">
-              {address ? (
-                address
-              ) : error ? (
-                <span className="text-red-500">{error}</span>
-              ) : (
-                "Detecting location..."
-              )}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <LocateFixed className="text-blue-500" />
+
+              <div className="text-sm text-gray-700 font-semibold truncate max-w-[200px] md:max-w-none">
+                {address ? (
+                  address
+                ) : error ? (
+                  <span className="text-red-500">{error}</span>
+                ) : (
+                  "Detecting location..."
+                )}
+              </div>
             </div>
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex items-center justify-between md:justify-end gap-6">
-            {/* ICONS */}
-            <div className="flex items-center gap-5">
+          <div className="flex items-center justify-between md:justify-end gap-4 md:gap-6">
+            <div className="flex items-center gap-4">
               <div className="relative">
                 <Bell size={24} />
                 <span className="absolute -top-2 -right-2 text-xs bg-green-600 text-white rounded-full px-1.5 py-0.5">
@@ -128,8 +143,10 @@ const Header = () => {
               {open && (
                 <div className="absolute right-0 top-full mt-2 bg-white shadow-lg rounded p-3 w-48 z-50 border">
                   <p className="font-semibold">Kavit Paulo</p>
-                  <p className="text-sm text-green-500 font-bold capitalize">{user.role}</p>
-                                
+                  <p className="text-sm text-green-500 font-bold capitalize">
+                    {user.role}
+                  </p>
+
                   <hr className="my-2" />
 
                   <ul className="text-sm space-y-2">

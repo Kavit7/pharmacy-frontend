@@ -1,8 +1,19 @@
-import React, { useState } from 'react'
-import Dashboard from '../Page/Dashboard';
-import { AppWindow, BlocksIcon, CircleDivide, CircleParkingOff, Croissant, Cross, DeleteIcon, Hospital, ListCheck, NotebookPen, PilcrowIcon, Pill, Settings, Settings2, Store, UserCheck } from 'lucide-react';
+import React from "react";
+import {
+  AppWindow,
+  CircleParkingOff,
+  Hospital,
+  ListCheck,
+  NotebookPen,
+  Pill,
+  Settings,
+  Settings2,
+  Store,
+  UserCheck,
+  X,
+} from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar = ({ open = false, onClose }) => {
   const list = [
     {
       text: "Dashboard",
@@ -67,49 +78,49 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-[70px] md:w-[240px] overflow-visible h-screen sticky top-0 bg-white border-r flex flex-col">
-      {/* Header */}
-      <div className="flex items-center gap-2 p-3">
-        <span className="bg-green-900 text-xs text-white font-bold rounded px-3 py-1">
-          K
-        </span>
-        <h2 className="text-lg font-bold text-green-800">Kavitacare</h2>
-        <span className="text-gray-400">Pharma</span>
+    <aside
+      className={`fixed inset-y-0 left-0 z-50 w-72 transform bg-white border-r shadow-xl transition-transform duration-300 md:static md:translate-x-0 md:shadow-none ${
+        open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-2 p-3 border-b md:border-b-0">
+        <div className="flex items-center gap-2">
+          <span className="bg-green-900 text-xs text-white font-bold rounded px-3 py-1">
+            K
+          </span>
+          <div>
+            <h2 className="text-lg font-bold text-green-800">Kavitacare</h2>
+            <span className="text-gray-400 text-sm">Pharma</span>
+          </div>
+        </div>
+        <button
+          className="md:hidden p-2 rounded bg-slate-100 hover:bg-slate-200"
+          onClick={onClose}
+          aria-label="Close sidebar"
+        >
+          <X size={18} />
+        </button>
       </div>
 
       <hr />
 
       {/* Scrollable Menu */}
-      <ul className="flex-1 overflow-hidden p-4 space-y-2">
+      <ul className="flex-1 overflow-y-auto p-4 space-y-2">
         {list.map((value, index) => {
           const Icon = value.icon;
 
           return (
             <li
               key={index}
-              className="relative rounded md:hover:bg-gray-400 group"
+              className="relative rounded hover:bg-slate-100 md:hover:bg-gray-100 group"
             >
               <a
                 href={value.link}
-                className="flex items-center justify-center md:justify-start gap-3 p-2"
+                className="flex items-center justify-start gap-3 p-3"
               >
-                {/* Icon */}
-                <Icon className={`${value.color} group-hover:text-white`} />
-
-                {/* Text */}
-                <span className="hidden md:block text-black/60 group-hover:text-white">
-                  {value.text}
-                </span>
+                <Icon className={`${value.color}`} />
+                <span className="text-black/80">{value.text}</span>
               </a>
-
-              {/* Tooltip for small screen */}
-              <span
-                className="absolute left-0 mr-5 top-0 -translate-y-1/2 
-bg-black text-white text-xs px-2 py-1 rounded 
-opacity-0 group-hover:opacity-100 md:hidden whitespace-normal z-50"
-              >
-                {value.text}
-              </span>
             </li>
           );
         })}
@@ -117,4 +128,4 @@ opacity-0 group-hover:opacity-100 md:hidden whitespace-normal z-50"
     </aside>
   );
 };
-export default Sidebar
+export default Sidebar;

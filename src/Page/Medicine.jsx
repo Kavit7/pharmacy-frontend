@@ -1,7 +1,16 @@
 import { Download, Upload, Plus, FileDown, Edit, Trash2 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import ImportMedicines from "../forms/ImportMedicines";
 
 const Medicine = () => {
+    const [importMedicine,setImportMedicine]=useState(false);
+
+    const handleImport= (e)=>{
+      e.preventDefault()
+        setImportMedicine(!importMedicine);
+    }
+
+
   return (
     <>
       {/* TOP BAR */}
@@ -25,7 +34,7 @@ const Medicine = () => {
           </a>
 
           {/* IMPORT */}
-          <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2">
+          <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2" onClick={handleImport}>
             <Upload size={18} />
             <span>Import</span>
           </button>
@@ -38,49 +47,9 @@ const Medicine = () => {
         </div>
       </div>
 
-      {/* 🔥 HINT SECTION (NEW)
-      <div className="mb-5 bg-gray-50 border border-gray-200 rounded p-4">
-        <p className="text-sm font-semibold text-gray-700">
-          📌 Upload Instructions
-        </p>
-
-        <p className="text-sm text-gray-600 mt-1">
-          Use the downloaded template. Do not change column names.
-        </p>
-
-        <p className="text-sm text-gray-600 mt-2">Required format:</p>
-
-        <div className="mt-2 overflow-x-auto">
-          <table className="text-xs w-full border">
-            <thead className="bg-green-600 text-white">
-              <tr>
-                <th className="border px-2 py-1">name</th>
-                <th className="border px-2 py-1">brand</th>
-                <th className="border px-2 py-1">manufacturer</th>
-                <th className="border px-2 py-1">category</th>
-                <th className="border px-2 py-1">price</th>
-                <th className="border px-2 py-1">stock</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border px-2 py-1">Paracetamol</td>
-                <td className="border px-2 py-1">GSK</td>
-                <td className="border px-2 py-1">GSK Ltd</td>
-                <td className="border px-2 py-1">Painkiller</td>
-                <td className="border px-2 py-1">2000</td>
-                <td className="border px-2 py-1">50</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <ul className="text-xs text-red-500 mt-3 space-y-1">
-          <li>• Do not change headers</li>
-          <li>• Price must be a number</li>
-          <li>• Stock must be a number</li>
-        </ul>
-      </div> */}
+      {importMedicine && (
+        <ImportMedicines/>
+      )}
 
       {/* TABLE */}
       <div className="w-full overflow-x-auto">
